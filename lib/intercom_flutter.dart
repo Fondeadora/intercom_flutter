@@ -150,4 +150,12 @@ class Intercom {
     return await _channel
         .invokeMethod<void>('handlePush', {'message': message});
   }
+
+  static Future<dynamic> displayArticle(String articleId) {
+    return _channel.invokeMethod('displayArticle', {'articleId': articleId});
+  }
+
+  static Future<dynamic> displayCarousel(String carouselId) {
+    return _channel.invokeMethod('displayCarousel', {'carouselId': carouselId});
+  }
 }

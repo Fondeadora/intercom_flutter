@@ -122,7 +122,7 @@ id unread;
         [Intercom logout];
         result(@"Logged out");
     }
-    else if ([@"logEvent" isEqualToString:call.method]) {
+    else if([@"logEvent" isEqualToString:call.method]) {
         NSString *name = call.arguments[@"name"];
         NSDictionary *metaData = call.arguments[@"metaData"];
         if(name != (id)[NSNull null] && name != nil) {
@@ -140,13 +140,20 @@ id unread;
     else if([@"displayMessageComposer" isEqualToString:call.method]) {
         NSString *message = call.arguments[@"message"];
         [Intercom presentMessageComposer:message];
-    } else if([@"sendTokenToIntercom" isEqualToString:call.method]){
+    } else if([@"sendTokenToIntercom" isEqualToString:call.method]) {
         NSString *token = call.arguments[@"token"];
         NSData* encodedToken=[token dataUsingEncoding:NSUTF8StringEncoding];
         [Intercom setDeviceToken:encodedToken];
         result(@"Token set");
-    }
-    else {
+    } else if([@"displayArticle" isEqualToString:call.method]) {
+        NSString *articleId = call.arguments[@"articleId"];
+        [Intercom presentArticle:articleId];
+        result(@"Presented article");
+    } else if([@"displayCarousel" isEqualToString:call.method]) {
+         NSString *carouselId = call.arguments[@"carouselId"];
+         [Intercom presentCarousel:carouselId];
+         result(@"Presented carousel");
+    } else {
         result(FlutterMethodNotImplemented);
     }
 }
